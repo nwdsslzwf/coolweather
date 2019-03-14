@@ -1,12 +1,12 @@
-package com.example.qyxy.coolweather.db;
+package com.example.qyxy.coolweather;
 
-import DataSupport;
+import org.litepal.crud.DataSupport;
 
 /**
  * Created by qyxy on 2019/3/14.
  */
 
-public class Province extends DataSupport {
+public class province extends DataSupport {
     private int id;
     private String provinceName;
 
