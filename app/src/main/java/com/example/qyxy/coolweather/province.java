@@ -23,3 +23,4 @@ public class province extends DataSupport {
         this.provinceName = provinceName;
     }
 }
+
