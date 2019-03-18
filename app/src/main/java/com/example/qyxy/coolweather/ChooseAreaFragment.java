@@ -1,6 +1,8 @@
 package com.example.qyxy.coolweather;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -81,18 +83,22 @@ public class ChooseAreaFragment extends Fragment {
                     titletext.setText(selectedProvince.getProvinceName());
                     dataList.clear();
                     cityList = DataSupport.where("province_Name = ?",
-                            String.valueOf(selectedProvince.getProvinceName())).find(city.class);  //--这个很厉害---------cityList = DataSupport.findAll( city.class)
+                            String.valueOf(selectedProvince.getProvinceName())).find(city.class);
+                    //--这个很厉害---------cityList = DataSupport.findAll( city.class)
 
                     for (city City : cityList) {
                         dataList.add(City.getCityName());
                         backButton.setVisibility(View.VISIBLE);
                     }
-
                     adapter.notifyDataSetChanged();
                     listView.setSelection(0);
                     currentLeverl = LEVEL_CITY;
                 }else if( currentLeverl == LEVEL_CITY ){
-
+                    String weatherId = cityList.get(position).getCityName();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("city_name_name", weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -111,6 +117,10 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
     }
+
+   // public  void maketip(Context context, String tips){
+    //    Toast.makeText(context, tips, Toast.LENGTH_SHORT).show();
+   // }
 
     private void add_Province() {
         DataSupport.deleteAll(province.class);
